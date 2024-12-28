@@ -1,3 +1,5 @@
+let caughtpokemon = require("../../models/pokemon-caught")
+
 let next = document.querySelector('#next')
 let decision = document.querySelector('#decision')
 let pokemon_name = document.querySelector('p')
@@ -37,15 +39,16 @@ catch1.addEventListener('click', function () {
         pokemon_container.append(div1);
         let y = document.createElement('img');
         y.src = `https://img.pokemondb.net/sprites/home/normal/2x/${pname}.jpg`;
-        div1.append(y);
-        name_1.innerText = pname;
-        name_1.style.fontWeight = 'bolder';
-        name_1.style.backgroundColor = 'whitesmoke';
-        div1.append(name_1);
-        decision.innerText = `Congratulations! You caught the ${pname}!`;
-        chances = 0;
-        next.click()
-        return;
+        
+        // div1.append(y);
+        // name_1.innerText = pname;
+        // name_1.style.fontWeight = 'bolder';
+        // name_1.style.backgroundColor = 'whitesmoke';
+        // div1.append(name_1);
+        // decision.innerText = `Congratulations! You caught the ${pname}!`;
+        // chances = 0;
+        // next.click()
+        // return;
     }
     else {
         decision.innerText = `Almost had it! The ${pname} broke free at the last moment`;
