@@ -7,6 +7,11 @@ decision.className = 'decision'
 let catch1 = document.querySelector('#catch')
 let img = document.querySelectorAll('img')
 const apiUrl = "https://pokeapi.co/api/v2/pokemon?limit=2000";
+dotenv.config({ path: './config.env' });
+let pokemon_caught = require("../../models/pokemon-caught")
+let mongoose= require("mongoose")
+
+
 next.addEventListener("click", function () {
 
     fetch(apiUrl)
@@ -35,6 +40,11 @@ catch1.addEventListener('click', function () {
         pokemon_container.append(div1);
         let y = document.createElement('img');
         y.src = `https://img.pokemondb.net/sprites/home/normal/2x/${pname}.jpg`;
+
+        // Database Update
+        new pokemon_caught.findByIdAndUpdate()
+
+
         div1.append(y);
         name_1.innerText = pname;
         name_1.style.fontWeight = 'bolder';
@@ -56,8 +66,6 @@ catch1.addEventListener('click', function () {
         chances = 0
         next.click();
     }
-
-
 });
 
 

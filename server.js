@@ -1,10 +1,11 @@
-const express = require("express")
-const path = require("path")
-const dotenv = require("dotenv")
 const app = express()
+const path = require("path")
+const bcrypt = require('bcrypt'); 
+const dotenv = require("dotenv")
+const express = require("express")
+const mongoose = require('mongoose');
 dotenv.config({ path: './config.env' });
 
-const mongoose = require('mongoose');
 mongoose.connect(process.env.DATABASE, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -15,14 +16,13 @@ mongoose.connect(process.env.DATABASE, {
 
 const Auth=require("./models/Auth")
 
-app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.set("view engine", "ejs");
-
+app.use(express.static("javascripts"))
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "stylesheets")))
 app.use(express.static(path.join(__dirname, "images")))
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static("javascripts"))
 
 // Homepage
 app.get("/home", (req, res) => {
@@ -37,9 +37,6 @@ app.get('/login', (req, res) => {
     res.render("login.ejs",{errorMsg:""})
 });
 
-let bcrpt = require("bcrypt")
-
-const bcrypt = require('bcrypt'); 
 
 // signup-request handling
 app.post('/signup', async (req, res) => {

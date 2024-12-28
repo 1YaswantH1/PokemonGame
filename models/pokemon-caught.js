@@ -1,10 +1,15 @@
 const mongoose = require('mongoose');
 
 let Schema = new mongoose.Schema({
-  pokemon_name: {
-    type: String,
-    required: true
-  }
+    user: {
+        type: Object,
+        required: true
+    },
+
+    pokemons: {
+        type: [String],
+        required: true
+    },
 });
 
 const caughtpokemon = mongoose.model('caughtpokemon', Schema);
