@@ -50,7 +50,7 @@ app.get('/login', (req, res) => {
 
 let bcrpt = require("bcrypt")
 // signup-post
-const bcrypt = require('bcrypt');  // Ensure bcrypt is required
+const bcrypt = require('bcrypt'); 
 
 app.post('/signup', async (req, res) => {
     try {
@@ -78,7 +78,7 @@ app.post('/signup', async (req, res) => {
     }
 });
 
-
+// login-request handling
 app.post("/login",async(req,res)=>{
     try {
         let data = req.body;
