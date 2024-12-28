@@ -36,7 +36,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static("javascripts"))
 
 // Homepage
-app.get("/", (req, res) => {
+app.get("/home", (req, res) => {
     res.render("pokemon.ejs")
 })
 
@@ -86,7 +86,7 @@ app.post("/login",async(req,res)=>{
         console.log(data);   
         const Database = await Auth.findOne({ username: data.email });
         if (await bcrpt.compare(data.password,Database.password)){
-            res.render("pokemon.ejs")
+            res.redirect("/home")
         }
         else{
         res.render("login.ejs",{errorMsg:"Incorrect username or password "})  }      
