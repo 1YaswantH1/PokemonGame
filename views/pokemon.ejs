@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="/images/logo.png" />
+  <title>Pokémon!</title>
+  <link rel="stylesheet" href="/stylesheets/pokemon.css" />
+</head>
+
+<body>
+  <nav>
+    <img src="/images/logo.png" alt="logo" />
+    <a href="">HOME</a>
+    <a href="">MAP</a>
+    <a href="">YOUR-POKEMON</a>
+    <a href="">WONDER_TRADE</a>
+    <a href="" id="Logout">LOGOUT</a>
+  </nav>
+  <br />
+  <center>
+    <div class="pokemonhunt">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png" alt="Random Pokémon" />
+    </div>
+    <div class="pokemonhunt">
+      <center>
+        <p id="pokemonNames">pikachu</p>
+      </center>
+    </div>
+    <div class="pokemonhunt">
+      <center><button id="catch">CATCH</button></center>
+    </div>
+    <div class="pokemonhunt">
+      <center><button id="next">NEXT</button></center>
+    </div>
+  </center>
+  <center>
+    <div class="pokemonhunt">
+      <p id="decision"></p>
+    </div>
+  </center>
+  <br />
+  <br />
+  <hr />
+  <h1 style="font-family: monospace">YOUR-POKEMON</h1>
+  <hr />
+  <div class="caught"></div>
+
+  <script src="/javascripts/pokemon.js"></script>
+</body>
+
+</html>

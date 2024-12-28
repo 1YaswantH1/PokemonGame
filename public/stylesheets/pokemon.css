@@ -1,0 +1,143 @@
+nav img {
+    float: left;
+    width: 50px;
+    height: auto;
+    margin-right: 20px;
+}
+
+nav {
+    background-color: #023047;
+    overflow: hidden;
+    padding: 10px;
+}
+
+nav a {
+    float: left;
+    color: whitesmoke;
+    text-decoration: none;
+    text-align: center;
+    font-family: monospace;
+    font-size: large;
+    padding: 14px 16px;
+
+
+}
+
+nav a:hover {
+    color: chartreuse;
+}
+
+body {
+    margin: 0px;
+}
+
+.pokemonhunt {
+    border-color: #023047;
+    border-width: 3px;
+    border-radius: 4px;
+    border-style: solid;
+    border-width: 4px;
+    width: 400px;
+    padding: 5px;
+}
+
+.pokemonhunt img {
+    width: 400px;
+    height: 400px
+}
+
+button {
+    padding: 10px;
+    background-color: #c81d25;
+    color: whitesmoke;
+    border-radius: 5px;
+    border: none;
+}
+
+button:hover {
+    transition-delay: .125s;
+    transition-duration: 1.2s, .125s;
+    background-color: #007200;
+    opacity: 75%;
+
+}
+
+#pokemonNames {
+    font-family: monospace;
+    font-size: 20px;
+
+}
+
+#pokemonNames:hover {
+    color: green;
+
+}
+
+#catch {
+    padding: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+#next {
+    padding: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+body {
+    background-color: #e9eb9e;
+}
+
+.your_pokemon {
+    padding: 2px;
+    border-radius: 2px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #023047;
+    width: 256px;
+    display: inline;
+
+
+
+}
+
+.your_pokemon p {
+    position: relative;
+    display: inline;
+
+}
+
+.name1 {
+    font-family: monospace;
+    font-weight: bolder;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 256px;
+    font-size: 30px; 
+}
+
+.item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid black;
+    margin: 1em;
+}
+
+.caught {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+}
+.decision{
+    font-weight: bolder;
+    font-size: 5em;
+    width: 400px;
+    display:flex;
+    flex-wrap: wrap;
+}
+#Logout{
+    float: right;
+}
