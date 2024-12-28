@@ -1,8 +1,17 @@
 const express = require("express")
 const path = require("path")
+const dotenv = require("dotenv")
 const app = express()
+dotenv.config({ path: './config.env' });
 
 const mongoose = require('mongoose');
+mongoose.connect(process.env.DATABASE, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+  .then(() => console.log("Connected to MongoDB Successfully"))
+  .catch((err) => console.error("MongoDB connection error:", err));
+
 
 const Auth=require("./models/Auth")
 
