@@ -48,6 +48,7 @@ app.get('/login', (req, res) => {
     res.render("login.ejs",{errorMsg:""})
 });
 
+let bcrpt = require("bcrypt")
 // signup-post
 app.post('/signup', async (req, res) => {
     try {
@@ -78,12 +79,10 @@ app.post('/signup', async (req, res) => {
     }
 });
 
-let bcrpt = require("bcrypt")
 app.post("/login",async(req,res)=>{
     try {
         let data = req.body;
-        console.log(data);
-       
+        console.log(data);   
         const Database = await Auth.findOne({ username: data.email });
         if (bcrpt.compare(data.password,Database.password)){
             res.render("pokemon.ejs")
