@@ -50,41 +50,41 @@ app.get('/login', (req, res) => {
 
 let bcrpt = require("bcrypt")
 // signup-post
+const bcrypt = require('bcrypt');  // Ensure bcrypt is required
+
 app.post('/signup', async (req, res) => {
     try {
         let data = req.body;
-        data.password=bcrpt.hash(data.password,4)
         console.log(data);
-        if (data.password!=data.confirm-password){
-            res.render("signup.ejs", {signin:true, errorMsg: "Password & Confirm Password Dosen't Match" });
-
+        if (data.password !== data.confirmpassword) {
+            return res.render("signup.ejs", { errorMsg: "Password & Confirm Password doesn't match." });
         }
-        const existingUser = await Auth.findOne({ username: data.username });
+        const existingUser = await Auth.findOne({ username: data.email });
         if (existingUser) {
             console.log("User exists");
-            res.render("signup.ejs", {signin:true, errorMsg: "Username already exists. Try another one." });
-        } else {
-        
-            let savedData = await new Auth({
-                username: data.username,
-                password: data.password,
-            }).save();
-
-            console.log(savedData);
-            res.render("pokemon.ejs");
+            return res.render("signup.ejs", { errorMsg: "Username already exists. Try another one." });
         }
+        const hashedPassword = await bcrypt.hash(data.password, 5);  
+        const savedData = await new Auth({
+            username: data.email,
+            password: hashedPassword,
+        }).save();
+
+        console.log(savedData);
+        res.render("pokemon.ejs");
     } catch (error) {
         console.error(error);
         res.render("signup.ejs", { errorMsg: "An error occurred. Please try again later." });
     }
 });
 
+
 app.post("/login",async(req,res)=>{
     try {
         let data = req.body;
         console.log(data);   
         const Database = await Auth.findOne({ username: data.email });
-        if (bcrpt.compare(data.password,Database.password)){
+        if (await bcrpt.compare(data.password,Database.password)){
             res.render("pokemon.ejs")
         }
         else{
