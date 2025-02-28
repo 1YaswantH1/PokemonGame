@@ -1,0 +1,42 @@
+body,
+nav a,
+nav p,
+.form-container,
+.pokemon-container,
+.caught .item .name1 {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-transform: capitalize;
+}
+
+nav img {
+  float: left;
+  width: 3.125rem;
+  height: auto;
+  margin-right: 1.25rem;
+}
+
+nav {
+  background-color: #023047;
+  overflow: hidden;
+  padding: 0.625rem;
+}
+
+nav a,
+nav p {
+  float: left;
+  color: whitesmoke;
+  text-decoration: none;
+  text-align: center;
+  font-size: 1.25rem;
+  padding: 0.875rem 1rem;
+}
+
+nav a:hover,
+nav p:hover {
+  color: chartreuse;
+}
+
+body {
+  margin: 0;
+  background-color: #e9eb9e;
+}

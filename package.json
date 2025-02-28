@@ -1,0 +1,23 @@
+{
+  "name": "pokemon_game",
+  "version": "1.0.0",
+  "description": "<p>prerequisite to run  express ,path ,ejs</p> <p></p> <p>npm i express</p> <p>npm i path</p> <p>npm i ejs</p> <p></p> <p>run express_app(3000-portnumber)</p>",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "connect-mongodb-session": "^5.0.0",
+    "dotenv": "^16.4.7",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "express-router": "^0.0.1",
+    "express-session": "^1.18.1",
+    "jsdom": "^25.0.1",
+    "path": "^0.12.7"
+  }
+}

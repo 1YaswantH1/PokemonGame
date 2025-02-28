@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="/images/logo.png" />
+  <title>Pokémon!</title>
+  <link rel="stylesheet" href="/stylesheets/pokemon.css" />
+  <link rel="stylesheet" href="/stylesheets/footer.css" />
+</head>
+
+<body>
+  <nav>
+    <img src="/images/logo.png" alt="logo" />
+    <a href="">HOME</a>
+    <a href="">MAP</a>
+    <a href="/yourpokemon">YOUR-POKEMON</a>
+    <a href="">WONDER_TRADE</a>
+    <a href="/logout" id="Logout">LOGOUT</a>
+  </nav>
+  <br />
+  <center>
+    <div class="pokemonhunt">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/0.png" alt="Random Pokémon" />
+      <p id="pokemonNames">pikachu</p>
+      <div class="buttons">
+        <button id="catch">CATCH</button>
+        <button id="next">NEXT</button>
+      </div>
+    </div>
+  </center>
+  <center>
+    <div class="decision-container">
+      <p id="decision"></p>
+    </div>
+  </center>
+  <br />
+  <br />
+  <hr />
+  <center>
+    <h1 style="font-family: 'Courier New', Courier, monospace;">POKEMON-CAUGHT-IN-MAP</h1>
+  </center>
+  <hr />
+  <div class="caught" style="font-family: 'Courier New', Courier, monospace;"></div>
+
+  <footer>
+    <!-- footer content -->
+    Pokémon Game © 2025
+  </footer>
+
+  <script src="/javascripts/pokemon.js"></script>
+</body>
+
+</html>

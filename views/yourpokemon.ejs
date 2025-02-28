@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="/images/logo.png" />
+    <link rel="stylesheet" href="/stylesheets/nav_bar.css">
+    <link rel="stylesheet" href="/stylesheets/yourpokemon.css">
+    <link rel="stylesheet" href="/stylesheets/footer.css">
+    <title>Your Pokémon</title>
+</head>
+
+<body>
+    <nav>
+        <img src="/images/logo.png" alt="logo" />
+        <a href="/home">HOME</a>
+        <a href="">MAP</a>
+        <a href="/yourpokemon">YOUR-POKEMON</a>
+        <a href="">WONDER_TRADE</a>
+        <a href="/logout" id="Logout">LOGOUT</a>
+    </nav>
+    <br />
+    <section class="pokemon-container">
+        <h1>Your Pokémon</h1>
+        <div class="caught">
+            <% if (pokemonList.length===0) { %>
+                <p>No Pokémon caught yet! Start your journey to catch some!</p>
+                <% } else { %>
+                    <% pokemonList.forEach(pokemon=> {
+                        const [type, name] = pokemon.toLowerCase().split(" ");
+                        %>
+                        <div class="item">
+                            <img src="https://img.pokemondb.net/sprites/home/<%= type %>/2x/<%= name %>.jpg"
+                                alt="<%= name %>">
+                            <p class="name1">
+                                <%= type %>
+                                    <%= name %>
+                            </p>
+                            <button class="release">Release</button>
+                        </div>
+                        <% }); %>
+                            <% } %>
+        </div>
+    </section>
+    <footer>
+        <!-- footer content -->
+        Pokémon Game © 2025
+    </footer>
+    <script src="../public/javascripts/yourpokemon.js"></script>
+</body>
+
+</html>
