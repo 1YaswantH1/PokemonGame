@@ -68,4 +68,27 @@ router.get('/yourpokemon', async (req, res) => {
     }
 });
 
+// Release Pokémon
+router.post('/release', async (req, res) => {
+    try {
+        if (!req.session.user) {
+            return res.status(401).redirect("/login");
+        }
+        const { type, pokemon_name } = req.body;
+        const user = await Auth.findById(req.session.user.id);
+        if (!user) return res.status(404).send({ message: "User not found" });
+
+        let caughtPokemon = await pokemon_caught.findOne({ username: user.username });
+        if (caughtPokemon) {
+            caughtPokemon.pokemon_name = caughtPokemon.pokemon_name.filter(pokemon => pokemon !== `${type} ${pokemon_name}`);
+            await caughtPokemon.save();
+        }
+
+        res.status(200).send({ message: "Pokemon released successfully" });
+    } catch (error) {
+        console.error("Error releasing Pokémon:", error);
+        res.status(500).send({ message: "Internal server error" });
+    }
+});
+
 module.exports = router;
