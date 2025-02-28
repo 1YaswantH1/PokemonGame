@@ -99,3 +99,7 @@ input[type="submit"]:hover {
         transform: translateY(0);
     }
 }
+
+.no-capitalize {
+    text-transform: none;
+}
