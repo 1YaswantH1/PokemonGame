@@ -59,7 +59,8 @@ router.get('/yourpokemon', async (req, res) => {
             return res.status(401).redirect("/login");
         }
         const pokemonData = await pokemon_caught.findOne({ username: req.session.user.username });
-        const pokemonList = pokemonData ? pokemonData.pokemon_name : [];
+        let pokemonList = pokemonData ? pokemonData.pokemon_name : [];
+        pokemonList = pokemonList.reverse(); // Sort the list in reverse order
         res.render("yourpokemon.ejs", { pokemonList });
     } catch (error) {
         console.error("Error fetching Pokémon:", error);
