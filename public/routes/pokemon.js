@@ -22,6 +22,12 @@ router.get('/home', (req, res) => {
     }
     res.render("pokemon.ejs", { errorMsg: null });
 });
+router.get('/', (req, res) => {
+    if (!req.session.user) {
+        return res.status(401).redirect("/login");
+    }
+    return res.status(401).redirect("/home");
+});
 
 // Save Pokémon
 router.post('/try', async (req, res) => {
