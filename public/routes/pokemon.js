@@ -4,18 +4,29 @@ const pokemon_caught = require("../../models/pokemon-caught");
 const Auth = require("../../models/Auth");
 const Friends = require("../../models/Friends");
 
-// GET Signup route
+
 router.get('/signup', (req, res) => {
     if (req.session.user) {
         return res.status(401).redirect("/home");
     }
     res.render("signup.ejs", { errorMsg: null });
 });
+
 router.get('/login', (req, res) => {
     if (req.session.user) {
         return res.status(401).redirect("/home");
     }
     res.render("login.ejs", { errorMsg: null });
+});
+
+router.get('/logout', (req, res) => {
+    req.session.destroy(err => {
+        if (err) {
+            console.error("Error destroying session:", err);
+            return res.status(500).send("Internal server error");
+        }
+        res.redirect("/login");
+    });
 });
 router.get('/home', (req, res) => {
     if (!req.session.user) {
@@ -135,6 +146,7 @@ router.get("/searchFriends", async (req, res) => {
         res.status(500).send({ message: "Internal server error" });
     }
 });
+
 
 
 
