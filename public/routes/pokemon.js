@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const pokemon_caught = require("../../models/pokemon-caught");
 const Auth = require("../../models/Auth");
+const Friends = require("../../models/Friends");
 
 // GET Signup route
 router.get('/signup', (req, res) => {
@@ -96,5 +97,40 @@ router.post('/release', async (req, res) => {
         res.status(500).send({ message: "Internal server error" });
     }
 });
+
+router.post("/addFriends", async (req, res) => {
+    try {
+        if (!req.session.user) {
+            return res.status(401).redirect("/login");
+        }
+        const { friend } = req.body;
+        const user = await Friends.findById(req.session.user.id);
+        if (!user) return res.status(404).send({ message: "User not found" });
+
+        if (!user.friends.includes(friend)) {
+            user.friends.push(friend);
+            await user.save();
+        }
+
+        res.status(200).send({ message: "Friend Added Successfully" });
+    } catch (error) {
+        console.error("Something Went Wrong Try Again:", error);
+        res.status(500).send({ message: "Internal server error" });
+    }
+});
+
+router.get("/searchFriends", async (req, res) => {
+    try {
+        if (!req.session.user) {
+            return res.status(401).redirect("/login");
+        }
+    } catch (error) {
+        console.error("Something Went Wrong Try Again:", error);
+        res.status(500).send({ message: "Internal server error" });
+    }
+
+})
+
+
 
 module.exports = router;

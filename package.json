@@ -18,6 +18,7 @@
     "express-router": "^0.0.1",
     "express-session": "^1.18.1",
     "jsdom": "^25.0.1",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "ws": "^8.18.1"
   }
 }
