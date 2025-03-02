@@ -124,12 +124,17 @@ router.get("/searchFriends", async (req, res) => {
         if (!req.session.user) {
             return res.status(401).redirect("/login");
         }
+        const { friend } = req.query;
+        const user = await Friends.findOne({ username: req.session.user.username });
+        if (!user) return res.status(404).send({ message: "User not found" });
+
+        const friendsList = user.friends.filter(f => f.includes(friend));
+        res.status(200).send({ friends: friendsList });
     } catch (error) {
         console.error("Something Went Wrong Try Again:", error);
         res.status(500).send({ message: "Internal server error" });
     }
-
-})
+});
 
 
 
