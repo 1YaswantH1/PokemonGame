@@ -1,5 +1,9 @@
-<span>To Install Dependencies Run</span>
-<p>npm i </p>
-<span>To Run The Project</span>
-<p>nodemon server.js</p>
+#To Install Dependencies Run
+```bash
+npm i 
+```
+#To Run The Project
+```bash
+nodemon server.js
+```
 
