@@ -109,6 +109,7 @@ router.post('/release', async (req, res) => {
         res.status(500).send({ message: "Internal server error" });
     }
 });
+// Trade Pokemon
 router.post('/trade', async (req, res) => {
     try {
         if (!req.session.user) {
