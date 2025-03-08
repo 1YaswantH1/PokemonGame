@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/images/logo.png" />
+    <title>Search And Offer</title>
+    <link rel="stylesheet" href="/stylesheets/footer.css" />
+    <link rel="stylesheet" href="/stylesheets/nav_bar.css" />
+</head>
+
+<body>
+    <%- include('partials/_nav') %>
+
+        <h1>Search Members</h1>
+        <form action="/search" method="get">
+            <label for="searchQuery">Search for members:</label>
+            <input type="text" id="searchQuery" name="searchQuery" placeholder="Enter member name or email" required>
+            <input type="submit" value="Search">
+        </form>
+
+        <%- include('partials/_footer.ejs') %>
+</body>
+
+</html>

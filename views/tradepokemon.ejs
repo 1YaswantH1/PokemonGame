@@ -8,17 +8,17 @@
     <link rel="stylesheet" href="/stylesheets/nav_bar.css">
     <link rel="stylesheet" href="/stylesheets/yourpokemon.css">
     <link rel="stylesheet" href="/stylesheets/footer.css">
-    <title>Your Pokémon</title>
+    <title>Trade Pokémon</title>
 </head>
 
 <body>
     <%- include('partials/_nav') %>
         <br />
         <section class="pokemon-container">
-            <h1>Your Pokémon</h1>
+            <h1>Trade Pokémon</h1>
             <div class="caught">
                 <% if (pokemonList.length===0) { %>
-                    <p>No Pokémon caught yet! Start your journey to catch some!</p>
+                    <p>No Pokémon available for trade! Add one from your collection!</p>
                     <% } else { %>
                         <% pokemonList.forEach(pokemon=> {
                             const [type, name] = pokemon.toLowerCase().split(" ");
@@ -30,9 +30,7 @@
                                     <%= type %>
                                         <%= name %>
                                 </p>
-
-                                <button class="release">Release</button>
-                                <button class="trade">Trade</button>
+                                <button class="btn">Remove From Trade</button>
                             </div>
                             <% }); %>
                                 <% } %>

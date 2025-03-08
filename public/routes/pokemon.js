@@ -3,6 +3,7 @@ const router = express.Router();
 const pokemon_caught = require("../../models/pokemon-caught");
 const Auth = require("../../models/Auth");
 const Friends = require("../../models/Friends");
+const Trade_Pokemon = require("../../models/TradePokemon")
 
 
 router.get('/signup', (req, res) => {
@@ -108,46 +109,95 @@ router.post('/release', async (req, res) => {
         res.status(500).send({ message: "Internal server error" });
     }
 });
-
-router.post("/addFriends", async (req, res) => {
+router.post('/trade', async (req, res) => {
     try {
         if (!req.session.user) {
             return res.status(401).redirect("/login");
         }
-        const { friend } = req.body;
-        const user = await Friends.findById(req.session.user.id);
+        const { type, pokemon_name } = req.body;
+        const user = await Auth.findById(req.session.user.id);
         if (!user) return res.status(404).send({ message: "User not found" });
 
-        if (!user.friends.includes(friend)) {
-            user.friends.push(friend);
-            await user.save();
+        let caughtPokemon = await pokemon_caught.findOne({ username: user.username });
+        if (caughtPokemon) {
+            caughtPokemon.pokemon_name = caughtPokemon.pokemon_name.filter(pokemon => pokemon !== `${type} ${pokemon_name}`);
+            await caughtPokemon.save();
+        }
+        let tradePokemon = await Trade_Pokemon.findOne({ username: user.username });
+        if (tradePokemon) {
+            tradePokemon.pokemon_name.push(`${type} ${pokemon_name}`);
+            await tradePokemon.save();
+        } else {
+            const newPokemon = new Trade_Pokemon({
+                username: user.username,
+                pokemon_name: [`${type} ${pokemon_name}`]
+            });
+            await newPokemon.save();
         }
 
-        res.status(200).send({ message: "Friend Added Successfully" });
+        res.status(200).send({ message: "Pokemon Added To Trade Successfully" });
     } catch (error) {
-        console.error("Something Went Wrong Try Again:", error);
+        console.error("Failed to Add Pokémon In Trade:", error);
         res.status(500).send({ message: "Internal server error" });
     }
 });
 
-router.get("/searchFriends", async (req, res) => {
+// Remove Pokémon from trade and add back to caught Pokémon
+router.post('/removeFromTrade', async (req, res) => {
     try {
         if (!req.session.user) {
             return res.status(401).redirect("/login");
         }
-        const { friend } = req.query;
-        const user = await Friends.findOne({ username: req.session.user.username });
+        const { type, pokemon_name } = req.body;
+        const user = await Auth.findById(req.session.user.id);
         if (!user) return res.status(404).send({ message: "User not found" });
 
-        const friendsList = user.friends.filter(f => f.includes(friend));
-        res.status(200).send({ friends: friendsList });
+        let tradePokemon = await Trade_Pokemon.findOne({ username: user.username });
+        if (tradePokemon) {
+            tradePokemon.pokemon_name = tradePokemon.pokemon_name.filter(pokemon => pokemon !== `${type} ${pokemon_name}`);
+            await tradePokemon.save();
+        }
+
+        let caughtPokemon = await pokemon_caught.findOne({ username: user.username });
+        if (caughtPokemon) {
+            caughtPokemon.pokemon_name.push(`${type} ${pokemon_name}`);
+            await caughtPokemon.save();
+        } else {
+            const newPokemon = new pokemon_caught({
+                username: user.username,
+                pokemon_name: [`${type} ${pokemon_name}`]
+            });
+            await newPokemon.save();
+        }
+
+        res.status(200).send({ message: "Pokemon removed from trade and added back to caught Pokémon successfully" });
     } catch (error) {
-        console.error("Something Went Wrong Try Again:", error);
+        console.error("Error removing Pokémon from trade:", error);
         res.status(500).send({ message: "Internal server error" });
     }
 });
 
+router.get('/searchAndOffer', (req, res) => {
+    if (!req.session.user) {
+        return res.status(401).redirect("/login");
+    }
+    res.render("searchandoffer.ejs", { errorMsg: null });
+});
 
+router.get('/tradePokemon', async (req, res) => {
+    try {
+        if (!req.session.user) {
+            return res.status(401).redirect("/login");
+        }
+        const pokemonData = await Trade_Pokemon.findOne({ username: req.session.user.username });
+        let pokemonList = pokemonData ? pokemonData.pokemon_name : [];
+        pokemonList = pokemonList.reverse(); // Sort the list in reverse order
+        res.render("tradepokemon", { pokemonList });
+    } catch (error) {
+        console.error("Error fetching Pokémon:", error);
+        res.status(500).send({ message: "Internal server error" });
+    }
+});
 
 
 module.exports = router;
