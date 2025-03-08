@@ -1,8 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const searchForm = document.getElementById('searchForm');
     const searchInput = document.getElementById('searchQuery');
-    const dropdown = document.createElement('div');
-    dropdown.classList.add('dropdown');
-    searchInput.parentNode.appendChild(dropdown);
+    const searchResults = document.getElementById('searchResults');
 
     searchInput.addEventListener('input', function () {
         const query = searchInput.value;
@@ -11,29 +10,28 @@ document.addEventListener('DOMContentLoaded', () => {
             fetch(`/search?searchQuery=${query}`)
                 .then(response => response.json())
                 .then(data => {
-                    dropdown.innerHTML = '';
+                    searchResults.innerHTML = '';
                     data.usernames.forEach(username => {
-                        const option = document.createElement('div');
-                        option.classList.add('dropdown-item');
-                        option.textContent = username;
-                        option.addEventListener('click', () => {
-                            searchInput.value = username;
-                            dropdown.innerHTML = '';
+                        const userDiv = document.createElement('div');
+                        userDiv.classList.add('user-item');
+                        userDiv.innerHTML = `<h3>${username}</h3>`;
+                        userDiv.addEventListener('click', () => {
+                            window.location.href = `/offer?username=${username}`;
                         });
-                        dropdown.appendChild(option);
+                        searchResults.appendChild(userDiv);
                     });
                 })
                 .catch(error => {
                     console.error('Error fetching search results:', error);
                 });
         } else {
-            dropdown.innerHTML = '';
+            searchResults.innerHTML = '';
         }
     });
 
     document.addEventListener('click', function (event) {
-        if (!dropdown.contains(event.target) && event.target !== searchInput) {
-            dropdown.innerHTML = '';
+        if (!searchResults.contains(event.target) && event.target !== searchInput) {
+            searchResults.innerHTML = '';
         }
     });
 });

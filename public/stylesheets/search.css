@@ -1,0 +1,42 @@
+.user-item {
+    padding: 8px;
+    cursor: pointer;
+}
+
+.pokemon-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.pokemon-item {
+    margin: 10px;
+    text-align: center;
+}
+
+.offer-btn {
+    margin-top: 10px;
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.offer-btn:hover {
+    background-color: #0056b3;
+}
+
+.dropdown {
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    max-height: 200px;
+    overflow-y: auto;
+    width: 100%;
+    z-index: 1000;
+}
+
+.user-item:hover {
+    background-color: #f0f0f0;
+}

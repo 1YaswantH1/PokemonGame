@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="/images/logo.png" />
+    <link rel="stylesheet" href="/stylesheets/nav_bar.css">
+    <link rel="stylesheet" href="/stylesheets/yourpokemon.css">
+    <link rel="stylesheet" href="/stylesheets/footer.css">
+    <title>Offer Pokémon</title>
+</head>
+
+<body>
+    <%- include('partials/_nav') %>
+        <br />
+        <section class="pokemon-container">
+            <h1>Offer Pokémon to <%= username %>
+            </h1>
+            <div class="caught">
+                <% if (pokemonList.length===0) { %>
+                    <p>No Pokémon available for trade! Add one from your collection!</p>
+                    <% } else { %>
+                        <% pokemonList.forEach(pokemon=> {
+                            const [type, name] = pokemon.toLowerCase().split(" ");
+                            %>
+                            <div class="item">
+                                <img src="https://img.pokemondb.net/sprites/home/<%= type %>/2x/<%= name %>.jpg"
+                                    alt="<%= name %>">
+                                <p class="name1">
+                                    <%= type %>
+                                        <%= name %>
+                                </p>
+                                <button class="offer-btn" data-username="<%= username %>"
+                                    data-pokemon="<%= pokemon %>">Offer</button>
+                            </div>
+                            <% }); %>
+                                <% } %>
+            </div>
+        </section>
+        <%- include('partials/_footer.ejs') %>
+            <script src="/javascripts/offer.js"></script>
+</body>
+
+</html>

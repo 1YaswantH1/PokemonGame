@@ -217,4 +217,20 @@ router.get('/search', async (req, res) => {
     }
 });
 
+// Fetch trade Pokémon for a specific user and render offer.ejs
+router.get('/offer', async (req, res) => {
+    try {
+        if (!req.session.user) {
+            return res.status(401).redirect("/login");
+        }
+        const { username } = req.query;
+        const pokemonData = await Trade_Pokemon.findOne({ username });
+        const pokemonList = pokemonData ? pokemonData.pokemon_name : [];
+        res.render("offer", { pokemonList, username });
+    } catch (error) {
+        console.error("Error fetching trade Pokémon:", error);
+        res.status(500).send({ message: "Internal server error" });
+    }
+});
+
 module.exports = router;
