@@ -200,5 +200,21 @@ router.get('/tradePokemon', async (req, res) => {
     }
 });
 
+// Search for players
+router.get('/search', async (req, res) => {
+    try {
+        if (!req.session.user) {
+            return res.status(401).redirect("/login");
+        }
+        const { searchQuery } = req.query;
+        const regex = new RegExp(`^${searchQuery}`, 'i'); // Case-insensitive regex to match usernames starting with searchQuery
+        const users = await Auth.find({ username: regex }).select('username -_id');
+        const usernames = users.map(user => user.username);
+        res.status(200).json({ usernames });
+    } catch (error) {
+        console.error("Error searching for players:", error);
+        res.status(500).send({ message: "Internal server error" });
+    }
+});
 
 module.exports = router;
